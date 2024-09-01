@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteo de Amistad</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe4e1;
+            color: #5a0a31;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        nav {
+            background-color: #ff69b4;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .container {
+            background-color: #ffb6c1;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin-top: 100px; /* Espacio para el nav */
+            position: relative;
+        }
+
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .container img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heart {
+            font-size: 50px;
+            color: #ff69b4;
+            animation: beat 1s infinite alternate;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px; /* Asegúrate de que el tamaño coincida con el área del contador */
+            height: 80px; /* Asegúrate de que el tamaño coincida con el área del contador */
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff69b4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none; /* Ocultar inicialmente */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="conteo.html">Conteo</a>
+        <a href="playlist.html">Playlist</a>
+    </nav>
+
+    <div class="container">
+        <div class="loader" id="loader"></div>
+        <img src="icons/2.jpeg" alt="Nuestra Amistad">
+        <h1>Nuestro primer mensaje fue hace: </h1>
+        <div class="countdown" id="countdown"></div>
+        <div class="heart">💖</div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const startDate = new Date('2022-07-26T00:00:00');
+            const now = new Date();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+            document.getElementById('countdown').style.display = 'block';
+            document.getElementById('loader').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('loader').style.display = 'block'; // Mostrar el loader
+            setTimeout(() => { // Simula el tiempo de carga
+                setInterval(updateCountdown, 1000);
+            }, 500); // Tiempo para mostrar el loader
+        });
+    </script>
+</body>
+</html>

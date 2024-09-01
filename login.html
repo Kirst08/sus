@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background-color: #f2a6cf;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 5px solid #2e004f;
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .login-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #d147a3;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .window-buttons {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+        }
+
+        .window-buttons div {
+            width: 12px;
+            height: 12px;
+            background-color: #2e004f;
+            margin-left: 4px;
+            border-radius: 50%;
+        }
+
+        .login-container h2 {
+            margin: 60px 0 30px 0;
+            text-align: center;
+            color: #2e004f;
+            font-size: 24px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 2px solid #2e004f;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: #ffd700;
+            color: #2e004f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #ffcd3c;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            .login-container h2 {
+                font-size: 20px;
+            }
+
+            .login-container input[type="text"],
+            .login-container input[type="password"] {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .login-container input[type="submit"] {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="window-buttons">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h2>Identificate</h2>
+        <form onsubmit="return validateForm()">
+            <input type="text" id="username" name="username" placeholder="putite123" required>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+            <input type="submit" value="LOGIN">
+            <p id="error-message" class="error-message"></p>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (username === "Susan" && password === "1234") {
+                window.location.href = "index.html"; // Redirigir a index.html
+                return false; // Prevenir el envío del formulario después de la redirección
+            } else {
+                errorMessage.textContent = "Usuario no admitido, fuera chusma";
+                return false; // Prevenir el envío del formulario si la validación falla
+            }
+        }
+    </script>
+
+</body>
+</html>
